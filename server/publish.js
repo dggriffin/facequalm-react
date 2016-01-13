@@ -2,18 +2,19 @@ if (Meteor.isServer) {
     //Publish only the current user's account
     Meteor.publish("account", function(gameId) {
         var currentUser = this.userId;
-        if(gameId) {
-            var currentGame = Games.findOne({
-                _id: gameId
-            });
-            if(currentGame) {
-                return Meteor.users.find({
-                    _id: {
-                        $in: currentGame.userIds
-                    }
-                });
-            }
-        }
+        //TODO -- Is this necessary?
+        // if(gameId) {
+        //     var currentGame = Games.findOne({
+        //         _id: gameId
+        //     });
+        //     if(currentGame) {
+        //         return Meteor.users.find({
+        //             _id: {
+        //                 $in: currentGame.userIds
+        //             }
+        //         });
+        //     }
+        // }
         return Meteor.users.find({
             _id: currentUser
         });

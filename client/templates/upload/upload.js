@@ -1,3 +1,14 @@
+
+Template.upload.onCreated(() =>{
+    var template = this;
+    template.autorun(() => {
+        template.subscribe('account');
+        template.subscribe('currentGame', Router.current().params._id);
+        template.subscribe('rounds', Router.current().params._id);
+    });
+});
+
+
 Template.upload.helpers({
     storedImages: function() {
         var currentGame = Games.findOne();

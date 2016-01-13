@@ -1,3 +1,15 @@
+Template.vote.onCreated(() =>{
+    var template = this;
+    template.autorun(() => {
+        template.subscribe('account', Router.current().params._id);
+        template.subscribe('currentGame', Router.current().params._id);
+        template.subscribe('rounds', Router.current().params._id);
+        template.subscribe('images'); 
+        template.subscribe('invites', Router.current().params._id);
+    });
+});
+
+
 Template.vote.helpers({
     storedImages: function() {
         var currentGame = Games.findOne();

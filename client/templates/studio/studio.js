@@ -22,6 +22,13 @@ var getPageCoords = function(e) {
 	};
 };
 
+Template.studio.onCreated(() =>{
+    var template = this;
+    template.autorun(() => {
+        template.subscribe('account');
+    });
+});
+
 Template.studio.events({
     'mousedown #studioCanvas, touchstart #studioCanvas': function(e){
   		context.strokeStyle = "#FFF";

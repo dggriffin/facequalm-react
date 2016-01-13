@@ -1,5 +1,14 @@
 var gameDep = new Tracker.Dependency();
 
+Template.home.onCreated(() =>{
+    var template = this;
+    template.autorun(() => {
+        template.subscribe('account');
+        template.subscribe('games');
+        tempalte.subscribe('invites');
+    });
+});
+
 //HOME TEMPLATE
 Template.home.events({
     'click #pending': function() {
@@ -75,7 +84,14 @@ Template.gameList.helpers({
 
 Template.gameList.events({
     'click #joinGame': function(e) {
-        Router.go("/upload/" + $(e.target).attr("gameId"));
+        var gameId = $(e.target).attr("gameId");
+        Meteor.call('joinGame', gameId, function(error, results){
+            if (error) {
+                console.log(error);
+            } else {
+                Router.go("/upload/" + gameId);
+            }
+        });
     }
 });
 
